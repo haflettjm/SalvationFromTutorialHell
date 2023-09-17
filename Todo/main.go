@@ -12,15 +12,16 @@ type todo struct {
 	completed   bool
 	timeEntered string
 	// small description about the Todo
-	someText string
+	descr string
 }
 
-func newTodo(name, someText string) *todo {
+func newTodo(name, descr string) *todo {
 	t := todo{name: name}
 	t.completed = false
 	//Turns out I was using time wrong before
 	now := time.Now()
 	t.timeEntered = now.Format("2006-01-02")
+	t.descr = ""
 	return &t
 }
 
@@ -46,20 +47,51 @@ func mainMenu() string {
 	return input
 }
 
+func createTodo() *todo {
+	now := time.Now()
+	var (
+		name        string
+		description string
+	)
+	fmt.Printf("Date created %s.", now.Format("2006-01-02"))
+	fmt.Println("Please enter a name for the todo:")
+	fmt.Scan(&name)
+
+	fmt.Println("Optional if you would like please enter a description for the todo:")
+	fmt.Scan(&description)
+
+	// assign these values
+	t := newTodo(name, description)
+	//Return the todo
+	return t
+}
+
+func outpuTodos(list []todo) {
+	for i, item := range list {
+		fmt.Printf("This is the %d and it is this:\n %s ", i, item)
+	}
+}
+
 func main() {
 	var quit bool
-
+	todos := make([]todo, 0)
 	for !quit {
 		choice := mainMenu()
 		switch choice {
 		case "A":
-			fmt.Println("Add a todo selected.")
+			fmt.Println("Add a todo selected")
+			var t todo
+			t = *createTodo()
+			todos = append(todos, t)
 		case "B":
 			fmt.Println("Load Todo File selected.")
 		case "C":
-			fmt.Println("Save Current Todos to File.")
+			fmt.Println("Save Current Todos to File selected.")
 		case "D":
-			fmt.Println("Print Loaded Todos.")
+			fmt.Println("Print Loaded Todos selected.")
+			outpuTodos(todos)
+		case "E":
+			fmt.Println("Update Todo selected.")
 		case "Q":
 			quit = true
 		default:
