@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 )
@@ -21,7 +23,7 @@ func newTodo(name, descr string) *todo {
 	//Turns out I was using time wrong before
 	now := time.Now()
 	t.timeEntered = now.Format("2006-01-02")
-	t.descr = ""
+	t.descr = descr
 	return &t
 }
 
@@ -47,6 +49,13 @@ func mainMenu() string {
 	return input
 }
 
+func readLine() string {
+	// Why isn't this done by default?
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	return input
+}
+
 func createTodo() *todo {
 	now := time.Now()
 	var (
@@ -55,10 +64,9 @@ func createTodo() *todo {
 	)
 	fmt.Printf("Date created %s.", now.Format("2006-01-02"))
 	fmt.Println("Please enter a name for the todo:")
-	fmt.Scan(&name)
-
+	name = readLine()
 	fmt.Println("Optional if you would like please enter a description for the todo:")
-	fmt.Scan(&description)
+	description = readLine()
 
 	// assign these values
 	t := newTodo(name, description)
@@ -69,7 +77,8 @@ func createTodo() *todo {
 func outpuTodos(list []todo) {
 	for i, item := range list {
 		// Okay so printing a struct needs a verb argument for printf weird
-		fmt.Printf("This is the %d and it is this:\n %v", i, item)
+
+		fmt.Printf("Todo # %d :\n %s \n Completed:\n %t \n Date Created:\n %s \n Description:\n %s", i+1, item.name, item.completed, item.timeEntered, item.descr)
 	}
 }
 
