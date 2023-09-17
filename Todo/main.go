@@ -51,6 +51,7 @@ func mainMenu() string {
 
 func readLine() string {
 	// Why isn't this done by default?
+	// Simple user Input is already a complex task why
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
 	return input
