@@ -68,7 +68,8 @@ func createTodo() *todo {
 
 func outpuTodos(list []todo) {
 	for i, item := range list {
-		fmt.Printf("This is the %d and it is this:\n %s ", i, item)
+		// Okay so printing a struct needs a verb argument for printf weird
+		fmt.Printf("This is the %d and it is this:\n %v", i, item)
 	}
 }
 
