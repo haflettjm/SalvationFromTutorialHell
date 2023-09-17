@@ -15,3 +15,8 @@ The first project in the 50 Project Challenge should be a todo app. It's obvious
     - Then from there I guess you would want to save this TODO list in a file to load it later. *shrug*
 
 I think that's it right? No more to add? Maybe a menu? Who knows it's 2am let's get this done.
+
+
+Developer thoughts:
+
+Since with visibility I know it's a small dumb project but is *it* worth it to ask questions like should I declare the TODO in the main function or leave it out there. Again I don't know let's try it in the main see what happens.
