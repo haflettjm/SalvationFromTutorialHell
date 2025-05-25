@@ -1,4 +1,63 @@
-# If you prefer the allow list template instead of the deny list, see community template:
+## ====================
+# General
+# ====================
+.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+*.lock
+
+# Environment
+.env
+.env.*.local
+
+# ====================
+# Node / Nuxt 3 / Tailwind CSS
+# ====================
+node_modules/
+dist/
+.nuxt/
+.output/
+.nitro/
+*.tsbuildinfo
+*.local
+*.cache
+tailwind.config.js
+postcss.config.js
+
+# Build output
+.vercel/
+.netlify/
+
+# Tailwind cache (used by JIT mode)
+.tailwind/
+.tailwind-cache/
+
+# ====================
+# Golang
+# ====================
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Dependency directories
+vendor/
+
+# ====================
+# Editor / IDE
+# ====================
+.idea/
+.vscode/
+ If you prefer the allow list template instead of the deny list, see community template:
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
 # Binaries for programs and plugins

@@ -26,10 +26,10 @@ Since with visibility I know it's a small dumb project but is *it* worth it to a
 # Roadmap (Ordered Checklist)
 
 ## 1. Project Setup
-- [ ] Initialize Nuxt 3 project
-- [ ] Install and configure Tailwind CSS
-- [ ] Set up ESLint / Prettier (optional but helpful)
-- [ ] Set up basic `layouts/default.vue` and `AppHeader.vue`
+- [x] Initialize Nuxt 3 project
+- [x] Install and configure Tailwind CSS
+- [x] Set up ESLint / Prettier (optional but helpful)
+- [x] Set up basic `layouts/default.vue` and `AppHeader.vue`
 
 ## 2. Basic UI Structure (Frontend Skeleton)
 - [ ] Layout: Page background and responsiveness
