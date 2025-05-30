@@ -25,19 +25,19 @@ Since with visibility I know it's a small dumb project but is *it* worth it to a
 
 # Roadmap (Ordered Checklist)
 
-## 1. Project Setup
+## 1. Project Setu\p
 - [x] Initialize Nuxt 3 project
 - [x] Install and configure Tailwind CSS
 - [x] Set up ESLint / Prettier (optional but helpful)
 - [x] Set up basic `layouts/default.vue` and `AppHeader.vue`
 
 ## 2. Basic UI Structure (Frontend Skeleton)
-- [ ] Layout: Page background and responsiveness
+- [x] Layout: Page background and responsiveness
 - [ ] `AppHeader` with site title and nav links
 - [ ] Input form for new todos
 - [ ] Display a static list of dummy todos
 
-## 3. Todo Data Structure (Frontend Only)
+## 3. Todo Data Structure (F\rontend Only)
 - [ ] Define todo object locally with:
   - `id`, `title`, `completed`, `dueDate`, `createdAt`, `updatedAt`
 - [ ] Handle adding a new todo (local state)
