@@ -1,5 +1,3 @@
-const todos = useState("todos", () => []);
-
 export interface Todo {
   id: string | number;
   title: string;
