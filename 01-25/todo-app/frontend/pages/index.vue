@@ -1,8 +1,9 @@
 <template>
     <div class="h-auto p-5 h-full flex-1 align-top flex-col">
         <section>
-            <div>
-                <h1 class="text-3xl font-bold mb-4">My TODO List</h1>
+            <div class="flex text-3xl justify-evenly text-center align-middle">
+                <h1 class="font-bold mb-4">My TODO List</h1>
+                <h2>+</h2>
             </div>
 
             <div v-if="pending">Loading todos...</div>
