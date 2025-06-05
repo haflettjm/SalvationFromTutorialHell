@@ -30,11 +30,19 @@ deno install --allow-net --allow-read --allow-write -n scraper ./scraper.ts
  - https://web-scraping.dev/
 
 ---
-## Planning
-- 1 hits an website html or something
-- 2 takes the html down 
-- 3 Parses HTML out into seperate nodes
-- 4 Collects this data into some sort of structure 
-- 5 Stores data within a folder of the website
-- 6 Then zips folder in an archive to store it?
-- 7 This is a completely useless application lol
+## Brainstorm goals
+
+- Have list of sites
+- Build out navigation web to cache of each site 
+- Pull full content into Cache
+- Dump cache of each domain to seperate file
+- Put file into zip folder
+- delete original folder
+- Then archive total haul for the scrape
+- Push to blob storage(long term goal)
+---
+## Notes
+
+I don't think this will have a serious use but I want to try and keep flow as professional as I can at the moment
+
+It's unlikely this data will be useful but I will at least have some solid fundamentals down for future projects I plan on building.
