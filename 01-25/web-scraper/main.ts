@@ -1,8 +1,9 @@
+const testURI :string = "https://www.web-scraping.dev";
 
 
-
-function main(): void {
-  console.log(`${Math.floor(Math.random() * 10)} is the number`)
+async function main (): Promise<void> {
+  const response = await fetch(new URL(testURI));
+  console.log(await response)
 }
 
 
