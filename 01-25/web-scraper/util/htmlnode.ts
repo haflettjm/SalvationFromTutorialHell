@@ -17,8 +17,7 @@ class DOMNode implements HTMLNode {
   htmlclass: string;
   image: boolean | false;
   imageLink?: string | undefined;
-
-  private children: HTMLNode[] = [];
+  children: HTMLNode[] = [];
 
   constructor(options: {
     text?: string;
@@ -36,8 +35,27 @@ class DOMNode implements HTMLNode {
     this.parent = options.parent;
   }
 
-  addChild(node: HTMLNode): void {
+  addChild(node: HTMLNode) {
     node.parent = this;
     this.children.push(node);
+  }
+
+  getChildren(): HTMLNode[] {
+    return this.children;
+  }
+
+  removeChild(node: HTMLNode) {
+    const indexToRemove = this.children.indexOf(node);
+    if (indexToRemove !== -1) {
+      this.children = this.children.splice(indexToRemove);
+    }
+  }
+
+  setLink(node: HTMLNode, link: string) {
+    this.link = link;
+  }
+  setImage(node: HTMLNode, imageLink: string) {
+    this.image = true;
+    this.imageLink = imageLink;
   }
 }
