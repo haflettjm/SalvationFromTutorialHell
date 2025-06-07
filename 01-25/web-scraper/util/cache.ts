@@ -1,7 +1,9 @@
-type Cache = {
-  pages: new Map<string, WebPage>,
-  images: new Map<string, Blob>,
-  rawResponses: new Map<string, Response>,
-  sitemap?: string[],
-  pageTree: new Map<string, HTMLNode>,
-}
+import type { Cake } from "./types";
+const cache: Cake = {
+  pages: new Map(),
+  images: new Map(),
+  rawResponses: new Map(),
+  pageTree: new Map(),
+};
+
+export default cache;
