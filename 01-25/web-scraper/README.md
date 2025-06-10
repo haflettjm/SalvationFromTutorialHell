@@ -1,4 +1,4 @@
-# 🕷️ Extremely Complicated Deno Web Scraper
+# 🕷️ Extremely Complicated Deno Web Scraper/Archiver
 
 A lightweight web scraper built with [Deno](https://deno.land/), designed to fetch and parse content from websites using modern JavaScript and native web APIs.
 
@@ -30,8 +30,9 @@ A lightweight web scraper built with [Deno](https://deno.land/), designed to fet
 deno install --allow-net --allow-read --allow-write -n scraper ./scraper.ts
 ```
 ---
-## Site
+## Site(s) used to build this
  - https://web-scraping.dev/
+ - https
 
 ---
 ## Brainstorm goals
@@ -50,3 +51,6 @@ deno install --allow-net --allow-read --allow-write -n scraper ./scraper.ts
 I don't think this will have a serious use but I want to try and keep flow as professional as I can at the moment
 
 It's unlikely this data will be useful but I will at least have some solid fundamentals down for future projects I plan on building.
+
+
+Might be useful for a quick data archiver of websites??
