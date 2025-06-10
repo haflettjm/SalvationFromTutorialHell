@@ -11,6 +11,9 @@ A lightweight web scraper built with [Deno](https://deno.land/), designed to fet
 - Outputs structured data (JSON/CSV/etc.)
 - CLI support for quick scraping tasks
 - Simple, modular architecture
+- Cache Implementation
+- Storage of scraped items to zip folders
+- MetaData stored with pages in .meta files for Sorting
 
 ---
 
@@ -33,7 +36,7 @@ deno install --allow-net --allow-read --allow-write -n scraper ./scraper.ts
 ## Brainstorm goals
 
 - Have list of sites
-- Build out navigation web to cache of each site 
+- Build out navigation web to cache of each site
 - Pull full content into Cache
 - Dump cache of each domain to seperate file
 - Put file into zip folder
