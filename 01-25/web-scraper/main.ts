@@ -1,10 +1,12 @@
-import cache from "./util/cache";
+import cache from "./util/cache.ts";
+import { HandleLoadPage } from "./core/request.ts";
 
 const testURI: string = "https://www.web-scraping.dev";
 
 async function main(): Promise<void> {
-  const response = await fetch(new URL(testURI));
-  console.log(response.body);
+  const response = await HandleLoadPage(testURI);
+  cache.pages.set(testURI, response.body);
+  console.log(cache.pages);
 }
 
 main();
