@@ -1,4 +1,4 @@
-# 🕷️ Deno Web Scraper
+# 🕷️ Extremely Complicated Deno Web Scraper
 
 A lightweight web scraper built with [Deno](https://deno.land/), designed to fetch and parse content from websites using modern JavaScript and native web APIs.
 

@@ -1,4 +1,6 @@
-class WebPage {
+import HTMLNode from "./htmlnode.ts";
+
+export class WebPage {
   title: string;
   rootNodes: HTMLNode[];
 
