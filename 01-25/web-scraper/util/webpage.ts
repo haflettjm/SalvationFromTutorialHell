@@ -1,28 +1,29 @@
-import HTMLNode from "./htmlnode.ts";
+import type DOMNode from "./nodes";
 
-export class WebPage {
+class WebPage {
   title: string;
-  rootNodes: HTMLNode[];
+  rootNodes: DOMNode[];
 
   constructor(title: string) {
     this.title = title;
     this.rootNodes = [];
   }
 
-  addRootNode(node: HTMLNode): void {
+  addRootNode(node: DOMNode): void {
     this.rootNodes.push(node);
   }
 
-  getAllNodes(): HTMLNode[] {
-    const all: HTMLNode[] = [];
+  getAllNodes(): DOMNode[] {
+    const all: DOMNode[] = [];
 
-    function traverse(node: HTMLNode) {
+    function traverse(node: DOMNode) {
       all.push(node);
-      if (node.children) {
-        node.children.forEach(traverse);
-      }
+      node.getChildren().forEach(traverse);
     }
+
     this.rootNodes.forEach(traverse);
     return all;
   }
 }
+
+export default WebPage;

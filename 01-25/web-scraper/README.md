@@ -14,6 +14,7 @@ A lightweight web scraper built with [Deno](https://deno.land/), designed to fet
 - Cache Implementation
 - Storage of scraped items to zip folders
 - MetaData stored with pages in .meta files for Sorting
+- DFS Implmentation for traversal
 
 ---
 

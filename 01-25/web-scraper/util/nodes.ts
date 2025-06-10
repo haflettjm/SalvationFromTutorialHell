@@ -11,13 +11,13 @@ interface HTMLNode {
 }
 
 class DOMNode implements HTMLNode {
-  text?: string | undefined;
-  parent?: HTMLNode | undefined;
+  text?: string;
+  parent?: DOMNode;
   link?: string;
   htmlclass: string;
-  image: boolean | false;
-  imageLink?: string | undefined;
-  children: HTMLNode[] = [];
+  image: boolean = false;
+  imageLink?: string;
+  children: DOMNode[] = [];
 
   constructor(options: {
     text?: string;
@@ -25,7 +25,7 @@ class DOMNode implements HTMLNode {
     link?: string;
     image?: boolean;
     imageLink?: string;
-    parent?: HTMLNode;
+    parent?: DOMNode;
   }) {
     this.text = options.text;
     this.htmlclass = options.htmlclass;
@@ -35,27 +35,30 @@ class DOMNode implements HTMLNode {
     this.parent = options.parent;
   }
 
-  addChild(node: HTMLNode) {
+  addChild(node: DOMNode): void {
     node.parent = this;
     this.children.push(node);
   }
 
-  getChildren(): HTMLNode[] {
+  getChildren(): DOMNode[] {
     return this.children;
   }
 
-  removeChild(node: HTMLNode) {
-    const indexToRemove = this.children.indexOf(node);
-    if (indexToRemove !== -1) {
-      this.children = this.children.splice(indexToRemove);
+  removeChild(node: DOMNode): void {
+    const index = this.children.indexOf(node);
+    if (index !== -1) {
+      this.children.splice(index, 1); // Fix: remove exactly one item
     }
   }
 
-  setLink(node: HTMLNode, link: string) {
+  setLink(link: string): void {
     this.link = link;
   }
-  setImage(node: HTMLNode, imageLink: string) {
+
+  setImage(imageLink: string): void {
     this.image = true;
     this.imageLink = imageLink;
   }
 }
+
+export default DOMNode;
