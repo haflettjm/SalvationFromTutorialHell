@@ -12,6 +12,7 @@ interface HTMLNode {
 }
 
 class DOMNode implements HTMLNode {
+  id: string;
   text?: string;
   tag: string;
   parent?: DOMNode;
@@ -22,6 +23,7 @@ class DOMNode implements HTMLNode {
   children: DOMNode[] = [];
 
   constructor(options: {
+    id: string;
     text?: string;
     tag: string;
     link?: string;
@@ -30,6 +32,7 @@ class DOMNode implements HTMLNode {
     classList: string[];
     parent?: DOMNode;
   }) {
+    this.id = options.id;
     this.text = options.text;
     this.tag = options.tag;
     this.link = options.link;

@@ -21,6 +21,7 @@ const aNode = new DOMNode({
   link: "/about",
   image: false,
   classList: [],
+  id: `node-2`,
 });
 
 const pNode = new DOMNode({
@@ -28,6 +29,7 @@ const pNode = new DOMNode({
   tag: "p",
   image: false,
   classList: [],
+  id: `node-1`,
 });
 pNode.addChild(aNode);
 
@@ -36,6 +38,7 @@ const divNode = new DOMNode({
   tag: "div",
   classList: ["root"],
   image: false,
+  id: `node-0`,
 });
 divNode.addChild(pNode);
 
@@ -46,6 +49,7 @@ function initEmptyCache(): Cake {
     rawResponses: new Map(),
     sitemap: [],
     pageTree: new Map(),
+    nextNodeId: 0,
   };
 }
 
@@ -74,12 +78,14 @@ Deno.test("stores child DOMNode tree correctly", () => {
 });
 Deno.test("Skips rebuild if HTML matches and force is false", () => {
   const cache = initEmptyCache();
-  const dummyPage = new WebPage(exampleurl);
-  cache.pages.set(exampleurl, dummyPage);
-  t;
-  const result = buildWebPage(htmlSample, cache, exampleurl, false);
-  cache.pages.set("https://example.com", dummyPage);
-  assertEquals(result.pageTree.get(exampleurl), undefined);
+  buildWebPage(htmlSample, cache, exampleurl);
+
+  const beforeNode = cache.pageTree.get(exampleurl);
+
+  buildWebPage(htmlSample, cache, exampleurl, false);
+
+  const afterNode = cache.pageTree.get(exampleurl);
+  assertEquals(beforeNode, afterNode);
 });
 
 Deno.test("skips parsing if HTML hasn't changed and force is false", () => {
@@ -119,12 +125,12 @@ Deno.test("rebuilds and overwrites pageTree entry when force is true", () => {
 });
 
 Deno.test("throws error on invalid HTML (missing <body>)", () => {
-  const badHtml = `<html><head><title>No body</title></head></html>`;
+  const badHtml = "<html><head><title>This is just span</title></head></html>";
   const cache = initEmptyCache();
 
   assertThrows(
     () => {
-      buildWebPage(badHtml, cache, "https://broken.com");
+      buildWebPage(badHtml, cache, "");
     },
     Error,
     "Invalid HTML: missing <body>",
