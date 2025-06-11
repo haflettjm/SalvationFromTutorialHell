@@ -2,11 +2,16 @@ import type DOMNode from "./nodes";
 
 class WebPage {
   title: string;
+  raw?: string;
   rootNodes: DOMNode[];
 
-  constructor(title: string) {
+  constructor(title: string, raw?: string) {
     this.title = title;
+    this.raw = raw;
     this.rootNodes = [];
+  }
+  addRawHTML(html: string): void {
+    this.raw = html;
   }
 
   addRootNode(node: DOMNode): void {

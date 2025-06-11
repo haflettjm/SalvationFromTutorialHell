@@ -6,8 +6,8 @@ Convert a raw HTML string into a `WebPage` with a tree of `DOMNode`s using depth
 
 ## 🔧 Setup
 
-- [ ] Receive HTML string from `HandleLoadPage()`
-- [ ] Use `DOMParser` to convert HTML string to a `Document` object
+- [x] Receive HTML string from `HandleLoadPage()`
+- [x] Use `DOMParser` to convert HTML string to a `Document` object
 
 ---
 

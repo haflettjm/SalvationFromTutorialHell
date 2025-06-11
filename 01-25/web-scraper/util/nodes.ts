@@ -4,7 +4,8 @@ interface HTMLNode {
   // List of children here
   children?: HTMLNode[];
   parent?: HTMLNode;
-  htmlclass: string;
+  tag: string;
+  classList: string[];
   link?: string;
   image: boolean;
   imageLink?: string;
@@ -12,27 +13,30 @@ interface HTMLNode {
 
 class DOMNode implements HTMLNode {
   text?: string;
+  tag: string;
   parent?: DOMNode;
   link?: string;
-  htmlclass: string;
+  classList: string[];
   image: boolean = false;
   imageLink?: string;
   children: DOMNode[] = [];
 
   constructor(options: {
     text?: string;
-    htmlclass: string;
+    tag: string;
     link?: string;
     image?: boolean;
     imageLink?: string;
+    classList: string[];
     parent?: DOMNode;
   }) {
     this.text = options.text;
-    this.htmlclass = options.htmlclass;
+    this.tag = options.tag;
     this.link = options.link;
     this.image = options.image ?? false;
     this.imageLink = options.imageLink;
     this.parent = options.parent;
+    this.classList = options.classList ?? [];
   }
 
   addChild(node: DOMNode): void {
@@ -42,6 +46,14 @@ class DOMNode implements HTMLNode {
 
   getChildren(): DOMNode[] {
     return this.children;
+  }
+
+  addClass(cl: string): void {
+    this.classList.push(cl);
+  }
+
+  getClass(): string[] {
+    return this.classList;
   }
 
   removeChild(node: DOMNode): void {
