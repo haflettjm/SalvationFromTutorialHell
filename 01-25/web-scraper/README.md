@@ -1,5 +1,7 @@
 # 🕷️ Extremely Complicated Deno Web Scraper/Archiver
 
+**This was a stupid project idea:**
+
 A lightweight web scraper built with [Deno](https://deno.land/), designed to fetch and parse content from websites using modern JavaScript and native web APIs.
 
 ---
@@ -37,14 +39,15 @@ deno install --allow-net --allow-read --allow-write -n scraper ./scraper.ts
 ---
 ## Brainstorm goals
 
-- Have list of sites
-- Build out navigation web to cache of each site
-- Pull full content into Cache
-- Dump cache of each domain to seperate file
-- Put file into zip folder
-- delete original folder
-- Then archive total haul for the scrape
-- Push to blob storage(long term goal)
+[] Have list of sites
+[ x ] Build out navigation web to cache of each site
+[ x ] Pull full content into Cache
+[] Dump cache of each domain to seperate file
+[] Put file into zip folder
+[] delete original folder
+[] Then archive total haul for the scrape
+[] Push archive to blob storage//s3(long term goal)
+
 ---
 ## Notes
 
