@@ -1,54 +1,60 @@
-# ✅ WebPage HTML Parsing Plan (DFS-based)
 
-Convert a raw HTML string into a `WebPage` with a tree of `DOMNode`s using depth-first search.
+# Web Crawler CLI: Completion Checklist
 
----
+## 📦 Core Functionality
+- [x] Crawl a given URL and parse HTML into a `DOMNode` tree
+- [x] Track and store unique node IDs (`node-{id}` style)
+- [ ] Maintain reverse lookup maps by tag and link
+- [x] Avoid duplicate links and DOM nodes
+- [ ] Support deep link crawling across multiple pages
+- [x] Handle invalid/malformed HTML gracefully (and log it)
+- [x] Add a `--force` flag to force rebuilds from the same HTML
+- [x] Track `sitemap`, `pages`, `pageTree`, and `rawResponses` cleanly in cache
+- [ ] Assign a unique crawl ID or timestamp for storage purposes
+- [ ] Add concurrency for crawling multiple links in parallel
 
-## 🔧 Setup
+## 🧪 Testing & Validation
+- [x] Unit tests for `buildWebPage`, `DfsWalk`, and cache behavior
+- [ ] Integration tests for full crawl pipeline with dummy HTML
+- [x] Tests that validate `pageTree` structure and content
+- [x] Tests that ensure proper skipping of redundant work
+- [ ] Tests for error handling on invalid/missing body
 
-- [x] Receive HTML string from `HandleLoadPage()`
-- [x] Use `DOMParser` to convert HTML string to a `Document` object
+## 🗂️ Data Storage & Archival
+- [ ] Write cache contents (including `sitemap`, DOM trees, and metadata) to JSON file
+- [ ] Save a human-readable log/report alongside each crawl (e.g., `crawl-log.txt`)
+- [ ] Zip the resulting folder per crawl (e.g., `crawl-2025-06-10.zip`)
+- [ ] Create `./archives/` directory structure and index
+- [ ] Compression with checksum validation
 
----
+## ⚙️ CLI Interface (e.g. `crawl.ts`)
+- [ ] Accept a target URL as input
+- [ ] Optional flags:
+  - [ ] `--force`
+  - [ ] `--output=PATH`
+  - [ ] `--depth=N`
+  - [ ] `--verbose` for debug output
+- [ ] Output status/progress to console
+- [ ] Write crawl summary to stdout and file
 
-## 🌿 Start from <body>
+## 🕒 Scheduling & Automation
+- [ ] Write a cron-friendly shell script wrapper
+- [ ] Store last crawl metadata (timestamp, site, pages)
+- [ ] Detect duplicate runs (avoid crawling unchanged sites unless forced)
+- [ ] Add cron logs or stdout capture
 
-- [ ] Access `document.body`
-- [ ] Get its direct children (`document.body.children`)
-- [ ] For each child element:
-  - [ ] Call the DFS function to build a `DOMNode`
-  - [ ] Add it to `WebPage` using `.addRootNode()`
+## 📘 Documentation
+- [x] Project README:
+  - [ ] Install instructions
+  - [ ] CLI usage
+  - [ ] Example output
+  - [ ] Dev setup
+- [ ] Inline code comments for complex logic
+- [ ] TypeDocs or JSDoc-style annotations for major types (like `DOMNode`, `WebPage`, `Cake`)
+- [ ] Document how to add new parsers or crawling rules
 
----
-
-## 🧭 DFS Function Logic
-
-- [ ] Take an `Element` as input
-- [ ] Create a new `DOMNode` with:
-  - [ ] `.text`: element’s `textContent` (trimmed)
-  - [ ] `.htmlclass`: value from `class` attribute
-  - [ ] `.link`: if the element has an `href`
-  - [ ] `.image`: set to `true` if tag is `<img>`
-  - [ ] `.imageLink`: if `<img>`, use `src` attribute
-- [ ] Loop over `element.children`
-  - [ ] For each child:
-    - [ ] Call DFS recursively
-    - [ ] Add the result as a child using `.addChild()`
-
----
-
-## 🧠 Optional Enhancements
-
-- [ ] Skip tags like `<script>`, `<style>`, `<noscript>` if not needed
-- [ ] Add `tagName` or `id` as part of `DOMNode` if useful
-- [ ] Limit depth or node count if you're processing large pages
-- [ ] Normalize whitespace and remove invisible elements
-
----
-
-## 🎯 Result
-
-- [ ] Return the `WebPage` instance
-- [ ] Now ready to store in your `Cake.pageTree` cache
-
----
+## 🚀 Stretch Goals / Advanced
+- [ ] Support robots.txt parsing
+- [ ] Integrate with SQLite or key-value store for large-scale archival
+- [ ] Web dashboard to browse archived crawls
+- [ ] Plugin system for post-processing DOM data (e.g., extracting articles or metadata)
