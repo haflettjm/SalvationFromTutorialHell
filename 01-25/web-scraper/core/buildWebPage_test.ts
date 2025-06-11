@@ -8,7 +8,7 @@ import {
 
 import { buildWebPage } from "./buildwebpage.ts";
 import { Cake } from "../util/types.ts";
-import DOMNode from "../util/nodes";
+import DOMNode from "../util/nodes.ts";
 import WebPage from "../util/webpage.ts";
 
 const htmlSample: string = `<div class="root"><p>Hello <a href="/about">World</a></p></div>`;
@@ -59,11 +59,24 @@ Deno.test("stores DOM tree root in pageTree", () => {
   assertEquals(root?.tag, "div");
   assertEquals(root?.classList.includes("root"), true);
 });
+Deno.test("stores child DOMNode tree correctly", () => {
+  const cache = initEmptyCache();
+  buildWebPage(htmlSample, cache, "https://example.com");
+
+  const root = cache.pageTree.get("https://example.com")!;
+  const pNode = root.getChildren()[0];
+  const aNode = pNode.getChildren()[0];
+
+  assertEquals(pNode.tag, "p");
+  assertEquals(aNode.tag, "a");
+  assertEquals(aNode.link, "/about");
+  assertEquals(aNode.text, "World");
+});
 Deno.test("Skips rebuild if HTML matches and force is false", () => {
   const cache = initEmptyCache();
   const dummyPage = new WebPage(exampleurl);
   cache.pages.set(exampleurl, dummyPage);
-
+  t;
   const result = buildWebPage(htmlSample, cache, exampleurl, false);
   cache.pages.set("https://example.com", dummyPage);
   assertEquals(result.pageTree.get(exampleurl), undefined);
@@ -71,7 +84,6 @@ Deno.test("Skips rebuild if HTML matches and force is false", () => {
 
 Deno.test("skips parsing if HTML hasn't changed and force is false", () => {
   const cache = initEmptyCache();
-
   // First build
   buildWebPage(htmlSample, cache, "https://example.com");
   const firstNode = cache.pageTree.get("https://example.com");
@@ -106,30 +118,6 @@ Deno.test("rebuilds and overwrites pageTree entry when force is true", () => {
   assertEquals(secondNode?.getChildren()[0]?.text, "Changed!");
 });
 
-Deno.test("stores DOM tree root in pageTree", () => {
-  const cache = initCache();
-  buildWebPage(htmlSample, cache, "https://example.com");
-
-  const root = cache.pageTree.get("https://example.com");
-  assertExists(root);
-  assertInstanceOf(root, DOMNode);
-  assertEquals(root.tag, "div");
-  assertEquals(root.cssClasses.includes("root"), true);
-});
-
-Deno.test("stores child DOMNode tree correctly", () => {
-  const cache = initCache();
-  buildWebPage(htmlSample, cache, "https://example.com");
-
-  const root = cache.pageTree.get("https://example.com")!;
-  const pNode = root.getChildren()[0];
-  const aNode = pNode.getChildren()[0];
-
-  assertEquals(pNode.tag, "p");
-  assertEquals(aNode.tag, "a");
-  assertEquals(aNode.link, "/about");
-  assertEquals(aNode.text, "World");
-});
 Deno.test("throws error on invalid HTML (missing <body>)", () => {
   const badHtml = `<html><head><title>No body</title></head></html>`;
   const cache = initEmptyCache();

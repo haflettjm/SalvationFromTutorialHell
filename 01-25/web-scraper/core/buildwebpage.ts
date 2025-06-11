@@ -1,7 +1,7 @@
 import { DOMParser, Element } from "jsr:@b-fuze/deno-dom";
-import { Cake } from "../util/types";
-import WebPage from "../util/webpage";
-import DOMNode from "../util/nodes";
+import { Cake } from "../util/types.ts";
+import WebPage from "../util/webpage.ts";
+import DOMNode from "../util/nodes.ts";
 
 function DfsWalk(element: Element): DOMNode {
   const text = element.textContent?.trim() ?? undefined;

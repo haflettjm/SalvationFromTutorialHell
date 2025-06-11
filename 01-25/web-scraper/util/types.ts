@@ -1,5 +1,5 @@
-import WebPage from "./webpage";
-import DOMNode from "./nodes";
+import WebPage from "./webpage.ts";
+import DOMNode from "./nodes.ts";
 
 // Cache Definition
 export type Cake = {

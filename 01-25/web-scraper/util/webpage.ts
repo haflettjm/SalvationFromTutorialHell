@@ -1,4 +1,4 @@
-import type DOMNode from "./nodes";
+import type DOMNode from "./nodes.ts";
 
 class WebPage {
   title: string;
