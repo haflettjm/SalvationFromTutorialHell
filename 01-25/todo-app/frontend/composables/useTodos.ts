@@ -1,5 +1,3 @@
-const todos = useState("todos", () => []);
-
 export interface Todo {
   id: string | number;
   title: string;
@@ -64,7 +62,7 @@ export function useTodos() {
     todos.value.push(newItem);
   };
   const deleteTodo = async (todoToDelete: Todo) => {
-    todos.value.pop(newItem);
+    todos.value.pop();
   };
   return { todos, fetchTodos, addTodo, deleteTodo };
 }
