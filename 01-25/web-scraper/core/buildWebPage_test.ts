@@ -5,15 +5,11 @@ import {
   assertInstanceOf,
   assertNotEquals,
 } from "@std/assert";
-
 import { buildWebPage } from "./buildwebpage.ts";
 import { Cake } from "../util/types.ts";
 import DOMNode from "../util/nodes.ts";
-import WebPage from "../util/webpage.ts";
 
 const htmlSample: string = `<div class="root"><p>Hello <a href="/about">World</a></p></div>`;
-const htmlChanged: string = `<div class="root"><p>Changed</p></div>`;
-const htmlInvalid: string = `<html><head><title>oops</title></head>`;
 const exampleurl: string = "https://example.com";
 const aNode = new DOMNode({
   text: "World",

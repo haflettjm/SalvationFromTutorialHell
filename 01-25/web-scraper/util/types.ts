@@ -3,6 +3,8 @@ import DOMNode from "./nodes.ts";
 
 // Cache Definition
 export type Cake = {
+  urls: Set<string>;
+  failedurls: Set<string>;
   pages: Map<string, WebPage>;
   images: Map<string, Blob>;
   rawResponses: Map<string, Response>;

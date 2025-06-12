@@ -34,7 +34,6 @@ function DfsWalk(element: Element, cache: Cake): DOMNode {
   return node;
 }
 
-// So from
 export function buildWebPage(
   html: string,
   cache: Cake,
@@ -49,8 +48,9 @@ export function buildWebPage(
   }
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
-  if (!doc.body || doc.body.childNodes.length === 0)
+  if (!doc.body || doc.body.childNodes.length === 0) {
     throw new Error("Invalid HTML: missing <body>");
+  }
 
   const page = new WebPage(uri, html);
   for (const child of doc.body.children) {

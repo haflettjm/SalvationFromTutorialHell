@@ -1,6 +1,9 @@
+import WebPage from "../util/webpage.ts";
+
+// Handles Loading the web-page from the internet
 export async function HandleLoadPage(
   uri: string,
-): Promise<{ response: Response; data: any }> {
+): Promise<{ response: Response; data: WebPage }> {
   const maxRetries = 3;
   const timeoutMs = 5000;
   const fetchWithTimeout = (
@@ -24,11 +27,16 @@ export async function HandleLoadPage(
         throw new Error(`Request failed with status ${response.status}`);
       }
       const clone = response.clone();
-      const data = await response.text();
+      const text = await response.text();
+      const data = new WebPage(uri, text);
 
       return { response: clone, data: data };
-    } catch (err: any) {
-      console.error(`Attempt ${attempt} failed: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(`Attempt ${attempt} failed: ${err.message}`);
+      } else {
+        console.error(`Attempt ${attempt} failed:`, err);
+      }
       if (attempt === maxRetries) throw err;
     }
   }
