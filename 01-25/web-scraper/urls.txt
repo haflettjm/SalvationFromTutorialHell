@@ -1,0 +1,10 @@
+httpbin.org
+books.toscrape.com
+quotes.toscrape.com
+openlibrary.org
+wikipedia.org
+webscraper.io/test-sites/e-commerce/more
+webscraper.io/test-sites/e-commerce/static
+webscraper.io/test-sites/tables/tables-multiple-header-rows
+https://www.scrapethissite.com/pages/
+https://finance.yahoo.com/

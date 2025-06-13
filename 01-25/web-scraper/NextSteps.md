@@ -28,7 +28,7 @@
 - [ ] Compression with checksum validation
 
 ## ⚙️ CLI Interface (e.g. `crawl.ts`)
-- [ ] Accept a target URL as input
+- [ ] Accept target URLs as input from .env variable
 - [ ] Optional flags:
   - [ ] `--force`
   - [ ] `--output=PATH`

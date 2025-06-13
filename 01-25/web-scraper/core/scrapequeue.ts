@@ -34,7 +34,9 @@ export default async function scrapeQueue(
   const pool = [];
   for (let i = 0; i < allUrls.length; i += poolLimit) {
     console.log(
-      `Scaping chunk ${i / poolLimit + 1} of ${Math.ceil(allUrls / poolLimit)}`,
+      `Scaping chunk ${i / poolLimit + 1} of ${
+        Math.ceil(allUrls.length / poolLimit)
+      }`,
     );
     const chunk = allUrls.slice(i, i + poolLimit);
     const tasks = chunk.map((url) => safeScrape(url, cache));

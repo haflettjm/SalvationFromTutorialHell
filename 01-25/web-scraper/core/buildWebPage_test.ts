@@ -1,15 +1,17 @@
+import { createTestCache as initEmptyCache } from "../util/test_helpers.ts";
 import {
   assertEquals,
-  assertThrows,
   assertExists,
   assertInstanceOf,
   assertNotEquals,
+  assertThrows,
 } from "@std/assert";
 import { buildWebPage } from "./buildwebpage.ts";
 import { Cake } from "../util/types.ts";
 import DOMNode from "../util/nodes.ts";
 
-const htmlSample: string = `<div class="root"><p>Hello <a href="/about">World</a></p></div>`;
+const htmlSample: string =
+  `<div class="root"><p>Hello <a href="/about">World</a></p></div>`;
 const exampleurl: string = "https://example.com";
 const aNode = new DOMNode({
   text: "World",
@@ -37,17 +39,6 @@ const divNode = new DOMNode({
   id: `node-0`,
 });
 divNode.addChild(pNode);
-
-function initEmptyCache(): Cake {
-  return {
-    pages: new Map(),
-    images: new Map(),
-    rawResponses: new Map(),
-    sitemap: [],
-    pageTree: new Map(),
-    nextNodeId: 0,
-  };
-}
 
 Deno.test("stores DOM tree root in pageTree", () => {
   const cache = initEmptyCache();

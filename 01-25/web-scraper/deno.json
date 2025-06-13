@@ -11,6 +11,7 @@
     "@std/http": "jsr:@std/http@^1.0.17",
     "@std/json": "jsr:@std/json@^1.0.2",
     "@std/net": "jsr:@std/net@^1.0.4",
-    "@std/path": "jsr:@std/path@^1.1.0"
+    "@std/path": "jsr:@std/path@^1.1.0",
+    "@std/testing": "jsr:@std/testing@^1.0.14"
   }
 }
