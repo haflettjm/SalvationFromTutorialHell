@@ -4,6 +4,7 @@ import scrapeQueue from "./core/scrapequeue.ts";
 import { loadYamlConfig } from "./util/helpers.ts";
 import { Config } from "./util/types.ts";
 
+const outFolder = "scrapes/";
 async function parseConfig(path: string): Promise<Config> {
   const config = await loadYamlConfig(path);
 
