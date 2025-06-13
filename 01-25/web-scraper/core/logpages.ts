@@ -1,15 +1,21 @@
+import { join } from "@std/path/join";
 import { scrapelog } from "../util/scrapelog.ts";
 import { Cake } from "../util/types.ts";
-import WebPage from "../util/webpage.ts";
-import { buildWebPage } from "./buildwebpage.ts";
+import { exists } from "@std/fs/exists";
 
-export default async function logger(cache: Cake): Promise<boolean> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log(cache);
-      resolve(true);
-    }, 200);
-  });
+export async function logger(
+  cache: Cake,
+  poolSize: number,
+): Promise<void> {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const outDir = `.${cache.outputDir}scrape-${timestamp}`;
+  const pagesDir = join(outDir, "pages");
+  await exists(pagesDir);
+  try {
+    await logQueue(cache, poolSize);
+  } catch (err) {
+    console.error(`log Queue broke sad:`, err.message);
+  }
 }
 
 async function logQueue(cache: Cake, poolSize: number): Promise<void> {
