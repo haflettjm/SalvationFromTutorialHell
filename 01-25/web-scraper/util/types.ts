@@ -15,3 +15,9 @@ export type Cake = {
   nodesByLink?: Map<string, DOMNode[]>;
   nextNodeId?: number;
 };
+
+export type Config = {
+  timeoutMax: number;
+  poolSize: number;
+  webUrls: string[];
+};
