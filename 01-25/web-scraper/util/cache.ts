@@ -6,6 +6,9 @@ const cache: Cake = {
   images: new Map(),
   rawResponses: new Map(),
   pageTree: new Map(),
+  sitemap: [],
+  outputDir: "",
+  failedLogs: [],
 };
 
 export default cache;

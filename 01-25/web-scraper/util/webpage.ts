@@ -4,13 +4,13 @@ class WebPage {
   title: string;
   raw?: string;
   rootNodes: DOMNode[];
-  lastScraped: number;
+  lastScraped: Date;
 
   constructor(title: string, raw?: string) {
     this.title = title;
     this.raw = raw;
     this.rootNodes = [];
-    this.lastScraped = 0;
+    this.lastScraped = new Date();
   }
   addRawHTML(html: string): void {
     this.raw = html;
@@ -21,7 +21,7 @@ class WebPage {
   }
 
   updateDate(): void {
-    this.lastScraped = Date.now();
+    this.lastScraped = new Date();
   }
 
   getAllNodes(): DOMNode[] {
@@ -34,6 +34,13 @@ class WebPage {
 
     this.rootNodes.forEach(traverse);
     return all;
+  }
+  toSerializable() {
+    return {
+      title: this.title,
+      rootNodes: this.rootNodes.map((node) => node.toSerializable?.()),
+      lastScraped: this.lastScraped,
+    };
   }
 }
 

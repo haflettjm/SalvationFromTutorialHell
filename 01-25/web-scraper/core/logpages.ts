@@ -2,6 +2,7 @@ import { join } from "@std/path/join";
 import { scrapelog } from "../util/scrapelog.ts";
 import { Cake } from "../util/types.ts";
 import { exists } from "@std/fs/exists";
+import { ensureDir } from "@std/fs";
 
 export async function logger(
   cache: Cake,
@@ -9,7 +10,9 @@ export async function logger(
 ): Promise<void> {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const outDir = `.${cache.outputDir}scrape-${timestamp}`;
+  await ensureDir(outDir);
   const pagesDir = join(outDir, "pages");
+  await ensureDir(pagesDir);
   await exists(pagesDir);
   try {
     await logQueue(cache, poolSize);

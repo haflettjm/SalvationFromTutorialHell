@@ -1,19 +1,24 @@
 export function normalizedUrls(raw: string[]): Set<string> {
-  const clean: Set<string> = new Set(
-    raw.map((url) => {
-      if (!url.startsWith("https://www.")) {
-        url = url.replace(/^https?:\/\//, "").replace(/^www\./, "");
-        url = `https://www.${url}`;
-      }
+  const clean: Set<string> = new Set<string>();
+  for (const url of raw) {
+    let u = url.trim();
 
-      try {
-        new URL(url);
-        return url;
-      } catch {
-        return null;
-      }
-    })
-      .filter((url): url is string => url != null),
-  );
+    // Remove accidental leading dots
+    u = u.replace(/^\.*/, "");
+
+    // Remove protocol and www, if present
+    u = u.replace(/^https?:\/\//, "").replace(/^www\./, "");
+
+    // Reconstruct
+    const finalUrl = `https://${u}`;
+
+    // Validate
+    try {
+      new URL(finalUrl);
+      clean.add(finalUrl);
+    } catch {
+      console.warn(`❌ Invalid URL skipped: ${finalUrl}`);
+    }
+  }
   return clean;
 }

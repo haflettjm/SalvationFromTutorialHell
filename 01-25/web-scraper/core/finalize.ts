@@ -1,6 +1,7 @@
 import { Cake } from "../util/types.ts";
 import { basename, dirname } from "@std/path";
 import runReport from "./report.ts";
+import { logger } from "./logpages.ts";
 
 async function zipThis(cache: Cake) {
   const zipName = `${cache.outputDir}.zip`;
@@ -17,10 +18,14 @@ async function zipThis(cache: Cake) {
   }
 }
 
-async function finalizeScrape(cache: Cake, start: number) {
-  await logQueue(cache);
+export async function finalizeScrape(
+  cache: Cake,
+  start: number,
+  poolSize: number,
+) {
+  await logger(cache, poolSize);
   await runReport(cache);
   await zipThis(cache);
   const duration = performance.now() - start;
-  console.log(`Scrape complete ${(duration / 1000).toFixed(3)}seconds`);
+  console.log(`Scrape complete ${(duration / 1000).toFixed(3)} seconds`);
 }

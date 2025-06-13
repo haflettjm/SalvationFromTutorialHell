@@ -11,6 +11,17 @@ interface HTMLNode {
   imageLink?: string;
 }
 
+export interface SerializableDOMNode {
+  id: string;
+  text?: string;
+  tag: string;
+  classList: string[];
+  link?: string;
+  image: boolean;
+  imageLink?: string;
+  children: SerializableDOMNode[];
+}
+
 class DOMNode implements HTMLNode {
   id: string;
   text?: string;
@@ -73,6 +84,18 @@ class DOMNode implements HTMLNode {
   setImage(imageLink: string): void {
     this.image = true;
     this.imageLink = imageLink;
+  }
+  toSerializable(): SerializableDOMNode {
+    return {
+      id: this.id,
+      text: this.text,
+      tag: this.tag,
+      classList: this.classList,
+      link: this.link,
+      image: this.image,
+      imageLink: this.imageLink,
+      children: this.children.map((child) => child.toSerializable()),
+    };
   }
 }
 
