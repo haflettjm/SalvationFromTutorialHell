@@ -28,6 +28,7 @@
     "jsr:@std/path@~0.213.1": "0.213.1",
     "jsr:@std/streams@^1.0.9": "1.0.9",
     "jsr:@std/testing@^1.0.14": "1.0.14",
+    "jsr:@std/yaml@*": "1.0.8",
     "jsr:@std/yaml@^1.0.8": "1.0.8",
     "npm:@types/node@*": "22.15.15"
   },

@@ -1,38 +1,24 @@
 import cache from "./util/cache.ts";
 import { normalizedUrls } from "./util/cleanurls.ts";
 import scrapeQueue from "./core/scrapequeue.ts";
-import { getEnvOrThrow } from "./util/helpers.ts";
+import { loadYamlConfig } from "./util/helpers.ts";
+import { Config } from "./util/types.ts";
 
-function getRequiredEnvVars(): {
-  timeoutN: number;
-  poolSizeN: number;
-  urls: string[];
-} {
-  const timeoutN = parseInt(getEnvOrThrow("TIMEOUT_LIMIT"));
-  const poolSizeN = parseInt(getEnvOrThrow("POOL_SIZE"));
+async function parseConfig(path: string): Promise<Config> {
+  const config = await loadYamlConfig(path);
 
-  const raw = Deno.env.get("WEBSITES");
-  if (!raw) throw new Error("WEBSITES is missing in .env");
-
-  let urls: string[];
-  try {
-    urls = JSON.parse(raw);
-  } catch {
-    throw new Error("WEBSITES must be a valid JSON array");
-  }
-
-  return { timeoutN, poolSizeN, urls };
+  return Promise.resolve(config);
 }
 async function main(): Promise<void> {
   try {
-    const { timeoutN, poolSizeN, urls } = getRequiredEnvVars();
+    const config: Config = await parseConfig("./config.yaml");
 
     const c = cache;
-    c.urls = normalizedUrls(urls);
+    c.urls = normalizedUrls(config.webUrls);
 
-    await scrapeQueue(c, poolSizeN, timeoutN);
+    await scrapeQueue(c, config.poolSize, config.timeoutMax);
     console.log(c);
-  } catch (err: unknown) {
+  } catch (err) {
     console.error("❌ Error:", err.message);
     Deno.exit(1);
   }
