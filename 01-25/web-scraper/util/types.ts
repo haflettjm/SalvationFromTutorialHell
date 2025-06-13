@@ -14,10 +14,20 @@ export type Cake = {
   nodesByTag?: Map<string, DOMNode[]>;
   nodesByLink?: Map<string, DOMNode[]>;
   nextNodeId?: number;
+  outputDir: string;
+  failedLogs: string[];
 };
 
 export type Config = {
   timeoutMax: number;
   poolSize: number;
   webUrls: string[];
+};
+
+export type LogEntry = {
+  url: string;
+  lastScraped: Date;
+  nodeCount: number;
+  htmlLength: number;
+  pageData: WebPage;
 };

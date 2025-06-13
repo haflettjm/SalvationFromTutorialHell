@@ -1,5 +1,6 @@
 import { Cake } from "../util/types.ts";
 import WebPage from "../util/webpage.ts";
+import { buildWebPage } from "./buildwebpage.ts";
 import { HandleLoadPage } from "./request.ts";
 
 // Create the list of total URLs to crawl
@@ -13,6 +14,11 @@ async function scrape(url: string, cache: Cake): Promise<WebPage> {
   const { response, data } = await HandleLoadPage(url);
   cache.rawResponses.set(url, response);
   cache.pages.set(url, data);
+  try {
+    buildWebPage(data.raw ?? "", cache, url, true);
+  } catch (err) {
+    console.error(`Failed to build DOM for ${url}: ${err.message}`);
+  }
   return data;
 }
 async function safeScrape(url: string, cache: Cake): Promise<WebPage | null> {
@@ -31,7 +37,6 @@ export default async function scrapeQueue(
   batchWait: number,
 ) {
   const allUrls: string[] = [...cache.urls];
-  const pool = [];
   for (let i = 0; i < allUrls.length; i += poolLimit) {
     console.log(
       `Scaping chunk ${i / poolLimit + 1} of ${
