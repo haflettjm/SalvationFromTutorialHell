@@ -4,7 +4,7 @@
 |---|---------|-------------|--------|
 | 01 | Todo App | Full-stack todo app with Go backend and Nuxt frontend | In Progress |
 | 02 | Web Scraper | CLI tool that scrapes web pages and outputs structured data | Started |
-| 03 | Hello World / Go Basics | Getting familiar with Go syntax, types, and packages | Started |
+| 03 | File Watcher / Live Reloader | Watch files and directories for changes, then auto-run commands (mini `entr`) | Not Started |
 | 04 | CLI File Manager | Navigate, copy, move, delete files from the terminal | Not Started |
 | 05 | REST API (CRUD) | Simple REST API with full CRUD operations and JSON responses | Not Started |
 | 06 | Log Parser | Read and parse log files, filter by level/date, output summaries | Not Started |
